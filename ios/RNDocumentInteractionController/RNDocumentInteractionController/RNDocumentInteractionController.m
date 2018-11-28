@@ -15,7 +15,8 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(open: (NSURL *)path)
 {
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
     UIViewController *topController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
     while (topController.presentedViewController) {
       topController = topController.presentedViewController;
@@ -25,6 +26,8 @@ RCT_EXPORT_METHOD(open: (NSURL *)path)
     interactionController.delegate = self;
     
     [interactionController presentOptionsMenuFromRect:topController.view.frame inView:topController.view animated:YES];
+        
+    });
     
 }
 
